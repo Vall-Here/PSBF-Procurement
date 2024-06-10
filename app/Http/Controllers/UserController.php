@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use RealRashid\SweetAlert\Facades\Alert;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('users.create', compact('roles'));
+        return view('User.add', compact('roles'));
     }
 
     public function store(Request $request)
@@ -48,6 +49,7 @@ class UserController extends Controller
         ]);
 
         $user->assignRole($request->role);
+        Alert::success('success', 'User created successfully.');
 
         return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
@@ -55,7 +57,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
-        return view('users.edit', compact('user', 'roles'));
+        return view('User.Edit', compact('user', 'roles'));
     }
 
     public function update(Request $request, User $user)
@@ -72,7 +74,7 @@ class UserController extends Controller
         ]);
 
         $user->syncRoles([$request->role]);
-
+        Alert::success('success', 'User berhasil diupdate.');
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 
