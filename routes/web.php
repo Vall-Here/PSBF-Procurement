@@ -19,6 +19,8 @@ Route::get('alert', function () {
 Route::get('products', [ProductController::class, 'index'])->name('products.index');
 
 
+
+// roles
 Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
 Route::get('roles/create', [RoleController::class, 'create'])->name('roles.create');
 Route::post('roles', [RoleController::class, 'store'])->name('roles.store');
