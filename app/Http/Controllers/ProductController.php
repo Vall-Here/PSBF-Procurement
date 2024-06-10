@@ -9,8 +9,19 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-        return view('products.index', compact('products'));
+        $products = Product::when(request('search') ?? false, function ($query, $search) {
+            return $query->where('name', 'LIKE', "%$search%");
+        })
+            ->paginate(10)
+            ->withQueryString();    
+        
+            $totalProducts = Product::count();
+
+        return view('Products.Index', [
+            'products' => $products,
+            'totalproducts' => $totalProducts,
+
+        ]);
     }
 
     public function create()
