@@ -21,10 +21,6 @@ class Product extends Model
     /**
      * Get the requisitions for the product.
      */
-    public function requisitions()
-    {
-        return $this->hasMany(Requisition::class);
-    }
 
     /**
      * Get the purchase orders for the product.

@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RKBController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RequisitionController;
 use App\Http\Controllers\PurchaseOrderController;
-use App\Http\Controllers\RoleController;
 
 Route::get('/', function () {
     return view('Index');
@@ -38,9 +39,15 @@ Route::get('users/edit/{user}', [UserController::class, 'edit'])->name('users.ed
 Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
 Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
-// Route::resource('products', ProductController::class);
-Route::resource('requisitions', RequisitionController::class);
-Route::resource('purchase-orders', PurchaseOrderController::class);
 
-Route::patch('requisitions/{requisition}/approve', [RequisitionController::class, 'approve'])->name('requisitions.approve');
-Route::patch('purchase-orders/{purchaseOrder}/approve', [PurchaseOrderController::class, 'approve'])->name('purchase-orders.approve');
+
+//rkb
+Route::resource('rkbs', RKBController::class);
+
+
+//requistion
+// Route::resource('requisitions', RequisitionController::class);
+// Route::resource('purchase-orders', PurchaseOrderController::class);
+
+// Route::patch('requisitions/{requisition}/approve', [RequisitionController::class, 'approve'])->name('requisitions.approve');
+// Route::patch('purchase-orders/{purchaseOrder}/approve', [PurchaseOrderController::class, 'approve'])->name('purchase-orders.approve');

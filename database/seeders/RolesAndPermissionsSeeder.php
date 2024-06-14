@@ -12,6 +12,9 @@ class RolesAndPermissionsSeeder extends Seeder
 {
     public function run()
     {
+       
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+
         // Define roles
         $roles = [
             'pengendali_gudang', 'pengendali_proc', 'pengendali_finansial',
@@ -19,31 +22,44 @@ class RolesAndPermissionsSeeder extends Seeder
             'pel_impor', 'pel_lokal', 'pel_intern', 'asset_staff'
         ];
 
-        // Create roles
+        // Create roles if they do not exist
         foreach ($roles as $role) {
-            Role::create(['name' => $role]);
+            Role::firstOrCreate(['name' => $role]);
         }
 
         // Define permissions
         $permissions = [
-            'manage_users', 'manage_products', // Tambahkan sesuai kebutuhan
+            'manage_users','manage_hak_akses', 'manage_products', 'manage_rkb', 'manage_purchase_orders', 'manage_vendors', 'manage_assets' 
         ];
 
-        // Create permissions
+        // Create permissions if they do not exist
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::firstOrCreate(['name' => $permission]);
         }
 
-        // Assign permissions to roles (example)
+        // Assign permissions to roles
         Role::findByName('kabag_proc')->givePermissionTo(['manage_users', 'manage_products']);
         // Tambahkan assign role dan permission lainnya sesuai dokumen
+        // Misalnya:
+        // Role::findByName('pengendali_gudang')->givePermissionTo(['manage_products']);
 
         // Create an admin user and assign role
-        $admin = User::create([
-            'name' => 'Admin User',
+        $admin = User::firstOrCreate([
             'email' => 'admin@example.com',
+        ], [
+            'name' => 'Admin User',
             'password' => Hash::make('password123'),
         ]);
+
         $admin->assignRole('kabag_proc');
+
+        // Tambahkan user tambahan sesuai kebutuhan
+        // $user = User::firstOrCreate([
+        //     'email' => 'user@example.com',
+        // ], [
+        //     'name' => 'Regular User',
+        //     'password' => Hash::make('password123'),
+        // ]);
+        // $user->assignRole('pengendali_gudang');
     }
 }
