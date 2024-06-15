@@ -69,30 +69,18 @@
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    {{-- <th scope="col" class="p-4">
-                                        <div class="flex items-center">
-                                            <input id="checkbox-all" type="checkbox"
-                                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="checkbox-all" class="sr-only">checkbox</label>
-                                        </div>
-                                    </th> --}}
+                           
                                     <th scope="col" class="px-4 py-3">Tahun Anggaran</th>
                                     <th scope="col" class="px-4 py-3">Jumlah Anggaran</th>
                                     <th scope="col" class="px-4 py-3">User</th>
+       
                                     <th scope="col" class="px-4 py-3">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($rkbs as $rkb)
                                     <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                        {{-- <td class="w-4 px-4 py-3">
-                                            <div class="flex items-center">
-                                                <input id="checkbox-table-search-1" type="checkbox"
-                                                    onclick="event.stopPropagation()"
-                                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                                            </div>
-                                        </td> --}}
+                                       
                                         <th scope="row"
                                             class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $rkb->tahun_anggaran }}
@@ -103,10 +91,11 @@
                                             <span
                                                 class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300 line-clamp-2 hover:line-clamp-none">{{ $rkb->user->name }}</span>
                                         </td>
+                            
                                     
                                         <td class=" py-3 flex items-start justify-start ps-3">
-                                            <button id="{{ $rkb->id }}-dropdown-button"
-                                                {{-- data-dropdown-toggle="{{ $rkb->id }}-dropdown" --}}
+                                            <button id="{{ $rkb->id_rkb }}-dropdown-button"
+                                                data-dropdown-toggle="{{ $rkb->id_rkb }}-dropdown"
                                                 class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
                                                 type="button">
                                                 <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
@@ -115,25 +104,25 @@
                                                         d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
                                                 </svg>
                                             </button>
-                                            <div id="{{ $rkb->name }}-dropdown"
+                                            <div id="{{ $rkb->id_rkb }}-dropdown"
                                                 class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                                {{-- <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                                    aria-labelledby="{{ $rkb->name }}-dropdown-button">
+                                                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                                    aria-labelledby="{{ $rkb->id_rkb }}-dropdown-button">
                                                     <li>
-                                                        <a href="{{ route('rkbs.update', $rkb->id) }}"
+                                                        <a href="{{ route('rkbs.edit', $rkb->id_rkb) }}"
                                                             class=" block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                                                     </li>
 
-                                                </ul> --}}
-                                                {{-- <div class="py-1" x-data>
-                                                    <form id="deleteForm-{{ $rkb->id }}" action="{{ route('rkbs.destroy', ['rkb' => $rkb->id]) }}" method="POST" class="inline-block">
+                                                </ul>
+                                                <div class="py-1" x-data>
+                                                    <form id="deleteForm-{{ $rkb->id_rkb }}" action="{{ route('rkbs.destroy', $rkb->id_rkb) }}" method="POST" class="inline-block">
                                                         @method('delete')
                                                         @csrf
-                                                        <button type="button" onclick="return confirmDelete({{ $rkb->id }})" class="w-full text-center mx-auto py-2 ps-4 pe-28 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                                        <button type="button" onclick="return confirmDelete({{ $rkb->id_rkb }})" class="w-full text-center mx-auto py-2 ps-4 pe-28 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                                             Delete
                                                         </button>
                                                     </form>
-                                                </div> --}}
+                                                </div>
                                                 
                                             </div>
                                         </td>

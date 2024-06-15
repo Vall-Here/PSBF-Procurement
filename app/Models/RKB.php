@@ -11,7 +11,7 @@ class RKB extends Model
 
     protected $table = 'rkb';
     protected $primaryKey = 'id_rkb';
-    protected $fillable = ['tahun_anggaran', 'jumlah_anggaran', 'user_id'];
+    protected $fillable = ['tahun_anggaran', 'jumlah_anggaran', 'user_id', 'status', 'review'];
 
     public function items()
     {

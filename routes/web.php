@@ -1,12 +1,12 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RKBController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\RequisitionController;
-use App\Http\Controllers\PurchaseOrderController;
+use App\Http\Controllers\PurchaseRequestController;
 
 Route::get('/', function () {
     return view('Index');
@@ -41,13 +41,23 @@ Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.d
 
 
 
-//rkb
+
+// rkb
 Route::resource('rkbs', RKBController::class);
 
+// Tambahkan rute tambahan untuk update, delete item dan create rkb
+Route::get('rkbs/items/edit/{id}', [RKBController::class, 'editItem'])->name('rkbs.items.edit');
+Route::put('rkbs/items/update/{id}', [RKBController::class, 'updateItem'])->name('rkbs.items.update');
+Route::delete('rkbs/items/delete/{id}', [RKBController::class, 'deleteItem'])->name('rkbs.items.delete');
+Route::post('rkbs/purchase-request/{id}', [RKBController::class, 'createPurchaseRequest'])->name('rkbs.create.purchase-request');
 
-//requistion
-// Route::resource('requisitions', RequisitionController::class);
-// Route::resource('purchase-orders', PurchaseOrderController::class);
 
-// Route::patch('requisitions/{requisition}/approve', [RequisitionController::class, 'approve'])->name('requisitions.approve');
-// Route::patch('purchase-orders/{purchaseOrder}/approve', [PurchaseOrderController::class, 'approve'])->name('purchase-orders.approve');
+
+// PP
+Route::resource('PP', PurchaseRequestController::class);
+// Tambahkan rute tambahan untuk update, delete item dan create purchase request
+Route::get('pp/items/edit/{id}', [PurchaseRequestController::class, 'editItem'])->name('PP.items.edit');
+Route::put('pp/items/update/{id}', [PurchaseRequestController::class, 'updateItem'])->name('PP.items.update');
+Route::delete('pp/items/delete/{id}', [PurchaseRequestController::class, 'deleteItem'])->name('PP.items.delete');
+Route::post('pp/{id}/submit-review', [PurchaseRequestController::class, 'submitForReview'])->name('PP.submitReview');
+Route::post('pp/{id}/review', [PurchaseRequestController::class, 'review'])->name('PP.review');

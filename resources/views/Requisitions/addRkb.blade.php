@@ -1,7 +1,6 @@
 @extends('Layouts.Master')
 @section('title', 'Daftar RKB')
 
-
 @section('content')
     <div class="min-h-screen p-4 sm:ml-64">
         <div class="mt-14 rounded-lg p-4">
@@ -12,18 +11,18 @@
                     <div class="mb-4">
                         <label for="tahun_anggaran" class="block text-sm font-medium text-gray-700">Tahun Anggaran</label>
                         <input type="number"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            class="mt-1 block w-full pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2"
                             id="tahun_anggaran" name="tahun_anggaran" required>
                     </div>
                     <div class="mb-4">
                         <label for="jumlah_anggaran" class="block text-sm font-medium text-gray-700">Jumlah Anggaran</label>
                         <input type="number" step="0.01"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                            id="jumlah_anggaran" name="jumlah_anggaran" required>
+                            class="mt-1 block w-full pl-2 rounded-md border-gray-300 shadow-sm py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            id="jumlah_anggaran" name="jumlah_anggaran" required readonly>
                     </div>
                     <button type="button"
                         class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        data-modal-toggle="addItemModal">
+                        data-modal-target="#addItemModal">
                         Tambah Item
                     </button>
                     <button type="submit"
@@ -31,14 +30,14 @@
                 </form>
 
                 <!-- Modal -->
-                <div class="modal hidden fixed z-10 inset-0 overflow-y-auto" id="addItemModal" aria-labelledby="modal-title"
+                <div class="hidden fixed z-10 inset-0 overflow-y-auto ml-64 pt-14" id="addItemModal" aria-labelledby="modal-title"
                     role="dialog" aria-modal="true">
                     <div class="modal-dialog relative p-4 w-full max-w-md h-full md:h-auto">
                         <div class="modal-content relative bg-white rounded-lg shadow">
                             <div class="modal-header flex justify-between items-center p-4 border-b rounded-t">
                                 <h5 class="modal-title text-xl font-semibold" id="modal-title">Tambah Item</h5>
                                 <button type="button" class="text-gray-400 hover:text-gray-600"
-                                    data-modal-toggle="addItemModal">
+                                    data-modal-target="#addItemModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20"
                                         fill="currentColor">
                                         <path fill-rule="evenodd"
@@ -53,48 +52,48 @@
                                         <label for="nama_barang" class="block text-sm font-medium text-gray-700">Nama
                                             Barang</label>
                                         <input type="text"
-                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            class="mt-1 block w-full py-2 pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                             id="nama_barang" name="nama_barang" required>
                                     </div>
                                     <div class="mb-4">
                                         <label for="satuan" class="block text-sm font-medium text-gray-700">Satuan</label>
                                         <input type="text"
-                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            class="mt-1 block w-full py-2 pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                             id="satuan" name="satuan" required>
                                     </div>
                                     <div class="mb-4">
                                         <label for="rencana_pakai" class="block text-sm font-medium text-gray-700">Rencana
                                             Pakai</label>
                                         <input type="number"
-                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            class="mt-1 block w-full py-2 pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                             id="rencana_pakai" name="rencana_pakai" required>
                                     </div>
                                     <div class="mb-4">
                                         <label for="rencana_beli" class="block text-sm font-medium text-gray-700">Rencana
                                             Beli</label>
                                         <input type="number"
-                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            class="mt-1 block w-full py-2 pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                             id="rencana_beli" name="rencana_beli" required>
                                     </div>
                                     <div class="mb-4">
                                         <label for="mata_uang" class="block text-sm font-medium text-gray-700">Mata
                                             Uang</label>
                                         <input type="text"
-                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            class="mt-1 block w-full py-2 pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                             id="mata_uang" name="mata_uang" required>
                                     </div>
                                     <div class="mb-4">
                                         <label for="harga_satuan" class="block text-sm font-medium text-gray-700">Harga
                                             Satuan</label>
                                         <input type="number" step="0.01"
-                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                            id="harga_satuan" name="harga_satuan" required>
+                                            class="mt-1 block w-full py-2 pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            id="harga_satuan" name="harga_satuan" required data-harga-satuan>
                                     </div>
                                     <div class="mb-4">
                                         <label for="keterangan"
                                             class="block text-sm font-medium text-gray-700">Keterangan</label>
                                         <textarea
-                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                            class="mt-1 block w-full py-2 pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                             id="keterangan" name="keterangan"></textarea>
                                     </div>
                                     <button type="button" id="add-item-button"
@@ -148,8 +147,8 @@
             </div>
         </div>
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                document.getElementById('add-item-button').addEventListener('click', function() {
+            document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById('add-item-button').addEventListener('click', function () {
                     const nama_barang = document.getElementById('nama_barang').value;
                     const satuan = document.getElementById('satuan').value;
                     const rencana_pakai = document.getElementById('rencana_pakai').value;
@@ -174,21 +173,25 @@
 
                     tbody.appendChild(tr);
 
+                    // Add event listener to remove buttons
+                    tr.querySelector('.remove-item-button').addEventListener('click', function () {
+                        tr.remove();
+                        updateJumlahAnggaran();
+                    });
+
+                    // Update total anggaran
+                    updateJumlahAnggaran();
+
                     // Clear the form
                     document.getElementById('add-item-form').reset();
 
                     // Close the modal
                     document.querySelector('#addItemModal').classList.add('hidden');
-
-                    // Add event listener to remove buttons
-                    tr.querySelector('.remove-item-button').addEventListener('click', function() {
-                        tr.remove();
-                    });
                 });
 
-                document.querySelectorAll('[data-modal-toggle]').forEach(element => {
-                    element.addEventListener('click', function() {
-                        const target = document.querySelector(this.getAttribute('data-modal-toggle'));
+                document.querySelectorAll('[data-modal-target]').forEach(element => {
+                    element.addEventListener('click', function () {
+                        const target = document.querySelector(this.getAttribute('data-modal-target'));
                         if (target.classList.contains('hidden')) {
                             target.classList.remove('hidden');
                         } else {
@@ -196,6 +199,19 @@
                         }
                     });
                 });
+
+                function updateJumlahAnggaran() {
+                    const tbody = document.getElementById('items-table').querySelector('tbody');
+                    let totalAnggaran = 0;
+
+                    tbody.querySelectorAll('tr').forEach(tr => {
+                        const rencanaBeli = parseFloat(tr.querySelector('input[name="items[rencana_beli][]"]').value);
+                        const hargaSatuan = parseFloat(tr.querySelector('input[name="items[harga_satuan][]"]').value);
+                        totalAnggaran += rencanaBeli * hargaSatuan;
+                    });
+
+                    document.getElementById('jumlah_anggaran').value = totalAnggaran.toFixed(2);
+                }
             });
         </script>
     </div>

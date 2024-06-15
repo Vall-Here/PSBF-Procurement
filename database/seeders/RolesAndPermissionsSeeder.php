@@ -29,7 +29,7 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // Define permissions
         $permissions = [
-            'manage_users','manage_hak_akses', 'manage_products', 'manage_rkb', 'manage_purchase_orders', 'manage_vendors', 'manage_assets' 
+            'manage_users','manage_hak_akses', 'manage_products', 'buat_rkb', 'edit_rkb','hapus_rkb','rencana_pembelian', 'manage_purchase_orders', 'manage_vendors', 'manage_assets' 
         ];
 
         // Create permissions if they do not exist

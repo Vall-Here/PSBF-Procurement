@@ -1,18 +1,18 @@
 <?php
 
+// app/Models/PurchaseRequestItem.php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RKBItem extends Model
+class PurchaseRequestItem extends Model
 {
     use HasFactory;
-    protected $table = 'rkb_items';
 
     protected $fillable = [
-        'id', // Add this line
-        'rkb_id',
+        'purchase_request_id',
         'nama_barang',
         'satuan',
         'rencana_pakai',
@@ -22,8 +22,8 @@ class RKBItem extends Model
         'keterangan',
     ];
 
-    public function rkb()
+    public function purchaseRequest()
     {
-        return $this->belongsTo(RKB::class, 'rkb_id');
+        return $this->belongsTo(PurchaseRequest::class);
     }
 }

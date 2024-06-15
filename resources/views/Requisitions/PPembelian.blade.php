@@ -1,5 +1,5 @@
 @extends('Layouts.Master')
-@section('title', 'Daftar Product')
+@section('title', 'Daftar PP')
 @section('content')
     <div class="min-h-screen p-4 sm:ml-64">
         <div class="mt-14 rounded-lg p-4">
@@ -16,13 +16,13 @@
                         <div class="flex items-center">
                             <i class="mx-1 w-3 text-gray-400 rtl:rotate-180">|</i>
                             <span class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400 md:ms-2">Daftar 
-                                produk</span>
+                                PP</span>
                         </div>
                     </li>
                 </ol>
             </nav>
             <h2 class="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white md:text-4xl">
-                Daftar  Produk</h2>
+                Daftar Permintaan Pembelian</h2>
      
 
             <div class="px-2 mx-auto max-w-screen-2xl lg:px-2">
@@ -31,8 +31,8 @@
                         class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
                         <div class="flex items-center flex-1 space-x-4">
                             <h5>
-                                <span class="text-gray-500">All Products:</span>
-                                <span class="dark:text-white">{{ $totalproducts }}</span>
+                                <span class="text-gray-500">All PPs:</span>
+                                <span class="dark:text-white">{{ $totalPPs }}</span>
                             </h5>
                             <form action="" method="GET" class="w-full mx-auto">
                                 <label for="default-search"
@@ -51,71 +51,45 @@
                                 </div>
                             </form>
                         </div>
-                        {{-- <div
-                            class="flex flex-col flex-shrink-0 space-y-3 md:flex-row md:items-center lg:justify-end md:space-y-0 md:space-x-3">
-
-                            <button type="button"
-                                class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                                <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-                                </svg>
-                                Export
-                            </button>
-                        </div> --}}
+                       
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppsercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    {{-- <th scope="col" class="p-4">
-                                        <div class="flex items-center">
-                                            <input id="checkbox-all" type="checkbox"
-                                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="checkbox-all" class="sr-only">checkbox</label>
-                                        </div>
-                                    </th> --}}
-                                    <th scope="col" class="px-4 py-3">Produk</th>
-                                    <th scope="col" class="px-4 py-3">Deskripsi</th>
-                                    <th scope="col" class="px-4 py-3">Harga</th>
-                                    <th scope="col" class="px-4 py-3">Stock</th>
-
+                           
+                                    <th scope="col" class="px-4 py-3">Tahun Anggaran</th>
+                                    <th scope="col" class="px-4 py-3">Jumlah Anggaran</th>
+                                    <th scope="col" class="px-4 py-3">User</th>
+                                    <th scope="col" class="px-4 py-3">Status</th>
+       
                                     <th scope="col" class="px-4 py-3">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products as $product)
+                                @foreach ($PPs as $PP)
                                     <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                        {{-- <td class="w-4 px-4 py-3">
-                                            <div class="flex items-center">
-                                                <input id="checkbox-table-search-1" type="checkbox"
-                                                    onclick="event.stopPropagation()"
-                                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                                            </div>
-                                        </td> --}}
+                                       
                                         <th scope="row"
                                             class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            <img src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
-                                                alt="iMac Front Image" class="w-auto h-8 mr-3">
-                                            {{ $product->name }}
+                                            {{ $PP->tahun_anggaran }}
                                         </th>
-                                        <td class="px-4 py-2">
-                                            <span
-                                                class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300 line-clamp-2 hover:line-clamp-none">{{ $product->description }}</span>
-                                        </td>
-                              
-                                        <td class="px-4 py-2">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
+                                        <td class="px-4 py-2">Rp {{ number_format($PP->jumlah_anggaran, 0, ',', '.') }}</td>
 
                                         <td class="px-4 py-2">
                                             <span
-                                                class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300 line-clamp-2 hover:line-clamp-none">{{ $product->stock }}</span>
+                                                class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300 line-clamp-2 hover:line-clamp-none">{{ $PP->user->name }}</span>
                                         </td>
+                            
+                                        <td class="px-4 py-2">
+                                            <span
+                                                class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300 line-clamp-2 hover:line-clamp-none">{{ $PP->status }}</span>
+                                        </td>
+                            
                                     
                                         <td class=" py-3 flex items-start justify-start ps-3">
-                                            <button id="{{ $product->id }}-dropdown-button"
-                                                {{-- data-dropdown-toggle="{{ $product->id }}-dropdown" --}}
+                                            <button id="{{ $PP->id }}-dropdown-button"
+                                                data-dropdown-toggle="{{ $PP->id }}-dropdown"
                                                 class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
                                                 type="button">
                                                 <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
@@ -124,27 +98,27 @@
                                                         d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
                                                 </svg>
                                             </button>
-                                            {{-- <div id="{{ $product->name }}-dropdown"
+                                            <div id="{{ $PP->id}}-dropdown"
                                                 class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                                    aria-labelledby="{{ $product->name }}-dropdown-button">
+                                                    aria-labelledby="{{ $PP->id }}-dropdown-button">
                                                     <li>
-                                                        <a href="{{ route('post-product-detail', $product->id) }}"
-                                                            class=" block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
+                                                        <a href="{{ route('PP.edit', $PP->id) }}"
+                                                            class=" block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                                                     </li>
 
                                                 </ul>
                                                 <div class="py-1" x-data>
-                                                    <form id="deleteForm-{{ $product->id }}" action="{{ route('admin.products.destroy', ['product' => $product->id]) }}" method="POST" class="inline-block">
+                                                    <form id="deleteForm-{{ $PP->id }}" action="{{ route('PP.destroy', $PP->id) }}" method="POST" class="inline-block">
                                                         @method('delete')
                                                         @csrf
-                                                        <button type="button" onclick="return confirmDelete({{ $product->id }})" class="w-full text-center mx-auto py-2 ps-4 pe-28 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                                        <button type="button" onclick="return confirmDelete({{ $PP->id }})" class="w-full text-center mx-auto py-2 ps-4 pe-28 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                                             Delete
                                                         </button>
                                                     </form>
                                                 </div>
                                                 
-                                            </div> --}}
+                                            </div>
                                         </td>
                                     </tr>
                              @endforeach
@@ -152,7 +126,7 @@
                         </table>
                     </div>
                     <div class="w-full p-8">
-                        {{ $products->links('Layouts.Pagination') }}
+                        {{ $PPs->links('Layouts.Pagination') }}
                     </div>
                 </div>
             </div>
