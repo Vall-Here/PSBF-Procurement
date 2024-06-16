@@ -89,7 +89,7 @@ class PurchaseRequestController extends Controller
         $pp = PurchaseRequest::findOrFail($id);
         $pp->items()->delete();
         $pp->delete();
-        // Alert::success('success', 'PP berhasil dihapus.');
+        Alert::success('success', 'PP berhasil dihapus.');
         return redirect()->route('PP.index')->with('success', 'pp deleted successfully.');
     }
 
@@ -126,7 +126,8 @@ class PurchaseRequestController extends Controller
         $item->delete();
 
         // Update total anggaran for pp
-        $pp->jumlah_anggaran = $pp->items->sum('harga_satuan');
+        $totalBudget = $pp->items->sum('harga_satuan') * $pp->items->sum('rencana_beli');
+        $pp->jumlah_anggaran = $totalBudget;
         $pp->save();
 
         return redirect()->route('PP.edit', $pp->id)->with('success', 'Item deleted successfully.');
@@ -143,7 +144,8 @@ class PurchaseRequestController extends Controller
         $pp = PurchaseRequest::findOrFail($id);
         $pp->update(['status' => 'pending']);
 
-        return redirect()->route('PP.index')->with('success', 'PP submitted for review.');
+        Alert ::success('Success', 'PP berhasil diajukan untuk review.');
+        return redirect()->route('PP.index');
     }
 
     public function review(Request $request, $id)

@@ -41,41 +41,33 @@ class RKBController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        // Validasi input
+        $validated = $request->validate([
             'tahun_anggaran' => 'required|integer',
             'jumlah_anggaran' => 'required|numeric',
-            'items.nama_barang.*' => 'required|string',
-            'items.satuan.*' => 'required|string',
-            'items.rencana_pakai.*' => 'required|integer',
-            'items.rencana_beli.*' => 'required|integer',
-            'items.mata_uang.*' => 'required|string',
-            'items.harga_satuan.*' => 'required|numeric',
         ]);
 
+        // Buat RKB baru
         $rkb = RKB::create([
-            'tahun_anggaran' => $request->tahun_anggaran,
-            'jumlah_anggaran' => $request->jumlah_anggaran,
-            // 'user_id' => auth()->id(),
-            'user_id' => 1,
+            'tahun_anggaran' => $validated['tahun_anggaran'],
+            'jumlah_anggaran' => $validated['jumlah_anggaran'],
+             // 'user_id' => auth()->id(),
+            'user_id' =>1,
         ]);
-        if (isset($request->items) && is_array($request->items) && isset($request->items['nama_barang'])) {
-        foreach ($request->items['nama_barang'] as $index => $nama_barang) {
-            $rkb->items()->create([
-                'nama_barang' => $nama_barang,
-                'satuan' => $request->items['satuan'][$index],
-                'rencana_pakai' => $request->items['rencana_pakai'][$index],
-                'rencana_beli' => $request->items['rencana_beli'][$index],
-                'mata_uang' => $request->items['mata_uang'][$index],
-                'harga_satuan' => $request->items['harga_satuan'][$index],
-                'keterangan' => $request->items['keterangan'][$index] ?? null,
-            ]);
-        }
-        }else {
-            Alert::error('Error', 'No items provided.');
-            return redirect()->route('rkbs.index')->with('error', 'No items provided.');
+
+        // Simpan item ke database
+        $items = session()->get('rkb_items', []);
+        foreach ($items as $item) {
+            $item['rkb_id'] = $rkb->id_rkb;
+            RKBItem::create($item);
         }
 
-        return redirect()->route('rkbs.index')->with('success', 'RKB created successfully.');
+        // Hapus sesi item
+        session()->forget('rkb_items');
+        session()->forget('total_budget');
+
+        Alert::success('Success', 'RKB berhasil dibuat.');
+        return redirect()->route('rkbs.index')->with('success', 'RKB berhasil dibuat.');
     }
 
     public function edit($id)
@@ -124,7 +116,7 @@ class RKBController extends Controller
             return redirect()->route('rkbs.index', $id)->with('error', 'No items provided.');
         }
 
-        return redirect()->route('rkbs.index')->with('success', 'RKB updated successfully.');
+        return redirect()->route('rkbs.index')->with('success', 'RKB berhasil diupdate.');
     }
 
     public function destroy($id)
@@ -132,8 +124,8 @@ class RKBController extends Controller
         $rkb = RKB::findOrFail($id);
         $rkb->items()->delete();
         $rkb->delete();
-
-        return redirect()->route('rkbs.index')->with('success', 'RKB deleted successfully.');
+        // Alert::success('success', 'RKB berhasil dihapus.');
+        return redirect()->route('rkbs.index')->with('success', 'RKB berhasil dihapus.');
     }
 
     public function updateItem(Request $request, $id)
@@ -218,6 +210,26 @@ class RKBController extends Controller
     public function addItem()
     {
         return view('Requisitions.RKB.addItemRkb');
+    }  
+
+    public function deleteItemOnAdd($index)
+    {
+        $items = session()->get('rkb_items', []);
+        
+        // Hapus item di index yang ditentukan
+        if (isset($items[$index])) {
+            unset($items[$index]);  
+            session()->put('rkb_items', array_values($items)); // Reindex array
+        }
+
+        // Perbarui jumlah anggaran di session
+        $totalBudget = 0;
+        foreach ($items as $item) {
+            $totalBudget += $item['harga_satuan'] * $item['rencana_beli'];
+        }
+        session()->put('total_budget', $totalBudget);
+
+        return redirect()->route('rkbs.create')->with('success', 'Item berhasil dihapus.');
     }
 
     public function storeItem(Request $request)
@@ -238,6 +250,15 @@ class RKBController extends Controller
         $items[] = $validated;
         session()->put('rkb_items', $items);
 
+        
+        $totalBudget = 0;
+        foreach ($items as $item) {
+            $totalBudget += $item['harga_satuan'] * $item['rencana_beli'];
+        }
+        session()->put('total_budget', $totalBudget);
+
         return redirect()->route('rkbs.create');
     }
+
+    
 }

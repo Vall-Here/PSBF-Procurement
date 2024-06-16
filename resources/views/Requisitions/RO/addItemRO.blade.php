@@ -6,7 +6,7 @@
     <div class="mt-14 rounded-lg p-4">
         <div class="container mx-auto px-4">
             <h1 class="text-2xl font-bold mb-4">Tambah Item</h1>
-            <form id="add-item-form" action="{{ route('rkbs.storeItem') }}" method="POST">
+            <form id="add-item-form" action="{{ route('rush_orders.storeItem') }}" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label for="nama_barang" class="block text-sm font-medium text-gray-700">Nama Barang</label>

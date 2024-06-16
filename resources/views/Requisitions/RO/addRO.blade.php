@@ -1,218 +1,100 @@
 @extends('Layouts.Master')
-@section('title', 'Daftar ro')
+@section('title', 'Daftar rush orders')
 
 @section('content')
-    <div class="min-h-screen p-4 sm:ml-64">
-        <div class="mt-14 rounded-lg p-4">
-            <div class="container mx-auto px-4">
-                <h1 class="text-2xl font-bold mb-4">Buat RO Baru</h1>
-                <form id="ro-form" action="{{ route('rush_orders.store') }}" method="POST">
-                    @csrf
-                    <div class="mb-4">
-                        <label for="tahun_anggaran" class="block text-sm font-medium text-gray-700">Tahun Anggaran</label>
-                        <input type="number"
-                            class="mt-1 block w-full pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2"
-                            id="tahun_anggaran" name="tahun_anggaran" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="jumlah_anggaran" class="block text-sm font-medium text-gray-700">Jumlah Anggaran</label>
-                        <input type="number" step="0.01"
-                            class="mt-1 block w-full pl-2 rounded-md border-gray-300 shadow-sm py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                            id="jumlah_anggaran" name="jumlah_anggaran" required readonly>
-                    </div>
-                    <button type="button"
-                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        data-modal-target="#addItemModal">
-                        Tambah Item
-                    </button>
-                    <button type="submit"
-                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Simpan</button>
-                </form>
-
-                <!-- Modal -->
-                <div class="hidden fixed z-10 inset-0 overflow-y-auto ml-64 pt-14" id="addItemModal" aria-labelledby="modal-title"
-                    role="dialog" aria-modal="true">
-                    <div class="modal-dialog relative p-4 w-full max-w-md h-full md:h-auto">
-                        <div class="modal-content relative bg-white rounded-lg shadow">
-                            <div class="modal-header flex justify-between items-center p-4 border-b rounded-t">
-                                <h5 class="modal-title text-xl font-semibold" id="modal-title">Tambah Item</h5>
-                                <button type="button" class="text-gray-400 hover:text-gray-600"
-                                    data-modal-target="#addItemModal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20"
-                                        fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <div class="modal-body p-4">
-                                <form id="add-item-form">
-                                    <div class="mb-4">
-                                        <label for="nama_barang" class="block text-sm font-medium text-gray-700">Nama
-                                            Barang</label>
-                                        <input type="text"
-                                            class="mt-1 block w-full py-2 pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                            id="nama_barang" name="nama_barang" required>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="satuan" class="block text-sm font-medium text-gray-700">Satuan</label>
-                                        <input type="text"
-                                            class="mt-1 block w-full py-2 pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                            id="satuan" name="satuan" required>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="rencana_pakai" class="block text-sm font-medium text-gray-700">Rencana
-                                            Pakai</label>
-                                        <input type="number"
-                                            class="mt-1 block w-full py-2 pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                            id="rencana_pakai" name="rencana_pakai" required>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="rencana_beli" class="block text-sm font-medium text-gray-700">Rencana
-                                            Beli</label>
-                                        <input type="number"
-                                            class="mt-1 block w-full py-2 pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                            id="rencana_beli" name="rencana_beli" required>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="mata_uang" class="block text-sm font-medium text-gray-700">Mata
-                                            Uang</label>
-                                        <input type="text"
-                                            class="mt-1 block w-full py-2 pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                            id="mata_uang" name="mata_uang" required>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="harga_satuan" class="block text-sm font-medium text-gray-700">Harga
-                                            Satuan</label>
-                                        <input type="number" step="0.01"
-                                            class="mt-1 block w-full py-2 pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                            id="harga_satuan" name="harga_satuan" required data-harga-satuan>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="keterangan"
-                                            class="block text-sm font-medium text-gray-700">Keterangan</label>
-                                        <textarea
-                                            class="mt-1 block w-full py-2 pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                            id="keterangan" name="keterangan"></textarea>
-                                    </div>
-                                    <button type="button" id="add-item-button"
-                                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Tambah
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+<div class="min-h-screen p-4 sm:ml-64">
+    <div class="mt-14 rounded-lg p-4">
+        <div class="container mx-auto px-4">
+            <h1 class="text-2xl font-bold mb-4">Buat Rush Order Baru</h1>
+            <form id="rush_orders-form" action="{{ route('rush_orders.store') }}" method="POST">
+                @csrf
+                <div class="mb-4">
+                    <label for="tahun_anggaran" class="block text-sm font-medium text-gray-700">Tahun Anggaran</label>
+                    <input type="number"
+                        class="mt-1 block w-full pl-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2"
+                        id="tahun_anggaran" name="tahun_anggaran" required>
                 </div>
+                <div class="mb-4">
+                    <label for="jumlah_anggaran" class="block text-sm font-medium text-gray-700">Jumlah Anggaran</label>
+                    <input type="number" step="1"
+                        class="mt-1 block w-full pl-2 rounded-md border-gray-300 shadow-sm py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        id="jumlah_anggaran" name="jumlah_anggaran" required readonly>
+                </div>
+                
+                <button type="submit"
+                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Simpan</button>
+            </form>
 
-                <!-- Items Table -->
-                <div class="mt-6">
-                    <h2 class="text-lg font-semibold mb-2">Daftar Item</h2>
-                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-200" id="items-table">
-                            <thead class="bg-gray-50">
+            <div class="mt-6">
+                <h2 class="text-lg font-semibold mb-2">Daftar Item</h2>
+                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-200" id="items-table">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Barang</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Satuan</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rencana Pakai</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rencana Beli</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mata Uang</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga Satuan</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Keterangan</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach(session('rush_order_items', []) as $item)
                                 <tr>
-                                    <th
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Nama Barang</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Satuan</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Rencana Pakai</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Rencana Beli</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Mata Uang</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Harga Satuan</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Keterangan</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Aksi</th>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $item['nama_barang'] }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $item['satuan'] }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $item['rencana_pakai'] }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $item['rencana_beli'] }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $item['mata_uang'] }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $item['harga_satuan'] }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $item['keterangan'] }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <form action="{{ route('rush_orders.deleteItemOnAdd', $loop->index) }}" method="POST" >
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-900">Hapus</button>
+                                        </form>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                            </tbody>
-                        </table>
-                    </div>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
+
+            <a href="{{ route('rush_orders.addItem') }}"
+            class="inline-flex mt-3 items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Tambah Item
+            </a>
         </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                document.getElementById('add-item-button').addEventListener('click', function () {
-                    const nama_barang = document.getElementById('nama_barang').value;
-                    const satuan = document.getElementById('satuan').value;
-                    const rencana_pakai = document.getElementById('rencana_pakai').value;
-                    const rencana_beli = document.getElementById('rencana_beli').value;
-                    const mata_uang = document.getElementById('mata_uang').value;
-                    const harga_satuan = document.getElementById('harga_satuan').value;
-                    const keterangan = document.getElementById('keterangan').value;
-
-                    const tbody = document.getElementById('items-table').querySelector('tbody');
-                    const tr = document.createElement('tr');
-
-                    tr.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap"><input type="hidden" name="items[nama_barang][]" value="${nama_barang}">${nama_barang}</td>
-                    <td class="px-6 py-4 whitespace-nowrap"><input type="hidden" name="items[satuan][]" value="${satuan}">${satuan}</td>
-                    <td class="px-6 py-4 whitespace-nowrap"><input type="hidden" name="items[rencana_pakai][]" value="${rencana_pakai}">${rencana_pakai}</td>
-                    <td class="px-6 py-4 whitespace-nowrap"><input type="hidden" name="items[rencana_beli][]" value="${rencana_beli}">${rencana_beli}</td>
-                    <td class="px-6 py-4 whitespace-nowrap"><input type="hidden" name="items[mata_uang][]" value="${mata_uang}">${mata_uang}</td>
-                    <td class="px-6 py-4 whitespace-nowrap"><input type="hidden" name="items[harga_satuan][]" value="${harga_satuan}">${harga_satuan}</td>
-                    <td class="px-6 py-4 whitespace-nowrap"><input type="hidden" name="items[keterangan][]" value="${keterangan}">${keterangan}</td>
-                    <td class="px-6 py-4 whitespace-nowrap"><button type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 remove-item-button">Hapus</button></td>
-                `;
-
-                    tbody.appendChild(tr);
-
-                    // Add event listener to remove buttons
-                    tr.querySelector('.remove-item-button').addEventListener('click', function () {
-                        tr.remove();
-                        updateJumlahAnggaran();
-                    });
-
-                    // Update total anggaran
-                    updateJumlahAnggaran();
-
-                    // Clear the form
-                    document.getElementById('add-item-form').reset();
-
-                    // Close the modal
-                    document.querySelector('#addItemModal').classList.add('hidden');
-                });
-
-                document.querySelectorAll('[data-modal-target]').forEach(element => {
-                    element.addEventListener('click', function () {
-                        const target = document.querySelector(this.getAttribute('data-modal-target'));
-                        if (target.classList.contains('hidden')) {
-                            target.classList.remove('hidden');
-                        } else {
-                            target.classList.add('hidden');
-                        }
-                    });
-                });
-
-                function updateJumlahAnggaran() {
-                    const tbody = document.getElementById('items-table').querySelector('tbody');
-                    let totalAnggaran = 0;
-
-                    tbody.querySelectorAll('tr').forEach(tr => {
-                        const rencanaBeli = parseFloat(tr.querySelector('input[name="items[rencana_beli][]"]').value);
-                        const hargaSatuan = parseFloat(tr.querySelector('input[name="items[harga_satuan][]"]').value);
-                        totalAnggaran += rencanaBeli * hargaSatuan;
-                    });
-
-                    document.getElementById('jumlah_anggaran').value = totalAnggaran.toFixed(2);
-                }
-            });
-        </script>
     </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        let totalAnggaran = 0;
+
+        // Function to calculate the total budget
+        function calculateTotalBudget() {
+            let totalBudget = 0;
+            $('#items-table tbody tr').each(function() {
+                let hargaSatuan = parseFloat($(this).find('td').eq(5).text()) || 0;
+                let rencanaBeli = parseFloat($(this).find('td').eq(3).text()) || 0;
+                totalBudget += hargaSatuan * rencanaBeli;
+            });
+            $('#jumlah_anggaran').val(totalBudget);
+        }
+
+        // Initial calculation
+        calculateTotalBudget();
+
+        // Listen for changes in the items and recalculate
+        $(document).on('input', '#items-table tbody tr td', function() {
+            calculateTotalBudget();
+        });
+    });
+</script>
 @endsection

@@ -16,11 +16,12 @@ class PurchaseRequest extends Model
         'user_id',
         'tahun_anggaran',
         'jumlah_anggaran',
+        'status',
     ];
     protected $casts = [
         'review_status' => 'array',
     ];
-
+    
     public function isApprovedByAll()
     {
         return collect($this->review_status)->every(function ($status) {

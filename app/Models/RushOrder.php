@@ -13,8 +13,8 @@ class RushOrder extends Model
     protected $fillable = [
         'tahun_anggaran',
         'jumlah_anggaran',
+        'user_id',
         'status',
-        'review_status',
     ];
 
     protected $casts = [
@@ -30,6 +30,10 @@ class RushOrder extends Model
 
     public function items()
     {
-        return $this->hasMany(RushOrderItem::class);
+        return $this->hasMany(RushOrderItem::class, 'rush_orders_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

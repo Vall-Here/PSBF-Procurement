@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\RushOrderController;
+use App\Http\Controllers\KlasifikasiController;
 use App\Http\Controllers\PurchaseRequestController;
 
 Route::get('/', function () {
@@ -52,10 +53,8 @@ Route::get('/rkbs/edit/{rkb}', [RKBController::class, 'edit'])->name('rkbs.edit'
 Route::put('/rkbs/{rkb}', [RKBController::class, 'update'])->name('rkbs.update');
 Route::delete('/rkbs/{rkb}', [RKBController::class, 'destroy'])->name('rkbs.destroy');
 
-
-// Tambahkan rute tambahan untuk update, delete item dan create rkb
-// routes/web.php
 Route::get('/rkbs/add-item', [RKBController::class, 'addItem'])->name('rkbs.addItem');
+Route::delete('/rkbs/item/{index}', [RKBController::class, 'deleteItemOnAdd'])->name('rkbs.deleteItemOnAdd');
 Route::post('/rkbs/store-item', [RKBController::class, 'storeItem'])->name('rkbs.storeItem');
 Route::get('rkbs/items/edit/{id}', [RKBController::class, 'editItem'])->name('rkbs.items.edit');
 Route::put('rkbs/items/update/{id}', [RKBController::class, 'updateItem'])->name('rkbs.items.update');
@@ -76,7 +75,23 @@ Route::post('pp/{id}/review', [PurchaseRequestController::class, 'review'])->nam
 
 
 //rush order
-Route::resource('rush_orders', RushOrderController::class);
+Route::get('/rush_orders', [RushOrderController::class, 'index'])->name('rush_orders.index');
+Route::get('/rush_orders/create', [RushOrderController::class, 'create'])->name('rush_orders.create');
+Route::post('/rush_orders', [RushOrderController::class, 'store'])->name('rush_orders.store');
+Route::get('/rush_orders/edit/{rkb}', [RushOrderController::class, 'edit'])->name('rush_orders.edit');
+Route::put('/rush_orders/{rkb}', [RushOrderController::class, 'update'])->name('rush_orders.update');
+Route::delete('/rush_orders/{rkb}', [RushOrderController::class, 'destroy'])->name('rush_orders.destroy');
 
 Route::post('rush_orders/{id}/submit-review', [RushOrderController::class, 'submitForReview'])->name('rush_orders.submitReview');
 Route::post('rush_orders/{id}/review', [RushOrderController::class, 'review'])->name('rush_orders.review');
+
+Route::get('/rush_orders/add-item', [RushOrderController::class, 'addItem'])->name('rush_orders.addItem');
+Route::delete('/rush_orders/item/{index}', [RushOrderController::class, 'deleteItemOnAdd'])->name('rush_orders.deleteItemOnAdd');
+Route::post('/rush_orders/store-item', [RushOrderController::class, 'storeItem'])->name('rush_orders.storeItem');
+Route::get('rush_orders/items/edit/{id}', [RushOrderController::class, 'editItem'])->name('rush_orders.items.edit');
+Route::put('rush_orders/items/update/{id}', [RushOrderController::class, 'updateItem'])->name('rush_orders.items.update');
+Route::delete('rush_orders/items/delete/{id}', [RushOrderController::class, 'deleteItem'])->name('rush_orders.items.delete');
+
+
+Route::get('/klasifikasi', [KlasifikasiController::class, 'index'])->name('klasifikasi.index');
+Route::post('/klasifikasi/update/{id}/{type}', [KlasifikasiController::class, 'update'])->name('klasifikasi.update');

@@ -16,13 +16,13 @@
                         <div class="flex items-center">
                             <i class="mx-1 w-3 text-gray-400 rtl:rotate-180">|</i>
                             <span class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400 md:ms-2">Daftar 
-                                rushorder</span>
+                                rush order</span>
                         </div>
                     </li>
                 </ol>
             </nav>
             <h2 class="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white md:text-4xl">
-                Daftar Permintaan Pembelian</h2>
+                Daftar Rush Order</h2>
      
 
             <div class="px-2 mx-auto max-w-screen-2xl lg:px-2">
@@ -31,7 +31,7 @@
                         class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
                         <div class="flex items-center flex-1 space-x-4">
                             <h5>
-                                <span class="text-gray-500">All rushorders:</span>
+                                <span class="text-gray-500">All rush orders:</span>
                                 <span class="dark:text-white">{{ $totalrushorders }}</span>
                             </h5>
                             <form action="" method="GET" class="w-full mx-auto">
@@ -116,13 +116,13 @@
                                                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                                     aria-labelledby="{{ $rushorder->id }}-dropdown-button">
                                                     <li>
-                                                        <a href="{{ route('rushorder.edit', $rushorder->id) }}"
+                                                        <a href="{{ route('rush_orders.edit', $rushorder->id) }}"
                                                             class=" block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                                                     </li>
 
                                                 </ul>
                                                 <div class="py-1" x-data>
-                                                    <form id="deleteForm-{{ $rushorder->id }}" action="{{ route('rushorder.destroy', $rushorder->id) }}" method="POST" class="inline-block">
+                                                    <form id="deleteForm-{{ $rushorder->id }}" action="{{ route('rush_orders.destroy', $rushorder->id) }}" method="POST" class="inline-block">
                                                         @method('delete')
                                                         @csrf
                                                         <button type="button" onclick="return confirmDelete({{ $rushorder->id }})" class="w-full text-center mx-auto py-2 ps-4 pe-28 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">

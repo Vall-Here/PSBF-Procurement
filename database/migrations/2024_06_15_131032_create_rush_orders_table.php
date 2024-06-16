@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('rush_orders', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->integer('tahun_anggaran');
             $table->decimal('jumlah_anggaran', 15, 2);
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->nullable();
             $table->json('review_status')->default(json_encode(['gudang' => 'pending', 'financial' => 'pending', 'procurement' => 'pending']));
+            $table->text('review')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
     

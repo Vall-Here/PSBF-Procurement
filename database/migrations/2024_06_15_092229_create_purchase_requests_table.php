@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('tahun_anggaran');
             $table->decimal('jumlah_anggaran', 15, 2);
             $table->timestamps();
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->nullable();
             $table->json('review_status')->default(json_encode(['gudang' => 'pending', 'financial' => 'pending', 'procurement' => 'pending']));
             $table->text('review')->nullable();
             $table->foreign('rkb_id')->references('id_rkb')->on('rkb')->onDelete('cascade');

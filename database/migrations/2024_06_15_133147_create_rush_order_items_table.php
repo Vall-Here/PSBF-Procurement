@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('mata_uang');
             $table->decimal('harga_satuan', 15, 2);
             $table->text('keterangan')->nullable();
+            $table->enum('methode', ['Pembelian Langsung', 'Public Tender', 'Penunjukan langsung'])->nullable();
+            $table->enum('state', ['Local', 'Impor', 'Internal'])->nullable();
             $table->timestamps();
 
             $table->foreign('rush_orders_id')->references('id')->on('rush_orders')->onDelete('cascade');
