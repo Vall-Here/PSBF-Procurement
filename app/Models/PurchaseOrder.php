@@ -9,20 +9,22 @@ class PurchaseOrder extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['requisition_id', 'vendor_id', 'status', 'details'];
+    protected $fillable = [
+        'vendor_id',
+        'source',
+        'methode',
+        'state',
+        'order_date',
+        'total_amount'
+    ];
 
-    public function requisition()
+    public function items()
     {
-        return $this->belongsTo(Requisition::class);
+        return $this->hasMany(PurchaseOrderItem::class);
     }
 
     public function vendor()
     {
         return $this->belongsTo(Vendor::class);
-    }
-
-    public function products()
-    {
-        return $this->belongsToMany(Product::class)->withPivot('quantity', 'price');
     }
 }

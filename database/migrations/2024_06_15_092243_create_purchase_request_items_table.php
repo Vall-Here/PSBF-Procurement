@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('keterangan')->nullable();
             $table->enum('methode', ['Pembelian Langsung', 'Public Tender', 'Penunjukan langsung'])->nullable();
             $table->enum('state', ['Local', 'Impor', 'Internal'])->nullable();
+            $table->enum('inPO', ['yes', 'no'])->default('no');
             $table->timestamps();
 
             $table->foreign('purchase_request_id')->references('id')->on('purchase_requests')->onDelete('cascade');

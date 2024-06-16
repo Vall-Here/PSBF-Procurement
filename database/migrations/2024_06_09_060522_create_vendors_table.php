@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone');
             $table->text('address');
+            $table->enum('methode', ['Pembelian Langsung', 'Public Tender', 'Penunjukan langsung'])->nullable();
+            $table->enum('state', ['Local', 'Impor', 'Internal'])->nullable();
             $table->timestamps();
         });
     }

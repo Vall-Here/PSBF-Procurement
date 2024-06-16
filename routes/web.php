@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\RushOrderController;
 use App\Http\Controllers\KlasifikasiController;
+use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\PurchaseRequestController;
 
 Route::get('/', function () {
@@ -93,5 +94,15 @@ Route::put('rush_orders/items/update/{id}', [RushOrderController::class, 'update
 Route::delete('rush_orders/items/delete/{id}', [RushOrderController::class, 'deleteItem'])->name('rush_orders.items.delete');
 
 
+
+// klasifikasi
 Route::get('/klasifikasi', [KlasifikasiController::class, 'index'])->name('klasifikasi.index');
 Route::post('/klasifikasi/update/{id}/{type}', [KlasifikasiController::class, 'update'])->name('klasifikasi.update');
+
+
+
+
+// purchase order
+Route::resource('purchase_orders', PurchaseOrderController::class);
+
+Route::get('purchase-orders/items', [PurchaseOrderController::class, 'filterItems'])->name('purchase_orders.filter_items');

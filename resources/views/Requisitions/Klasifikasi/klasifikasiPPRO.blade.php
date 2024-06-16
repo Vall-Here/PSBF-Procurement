@@ -23,6 +23,7 @@
                                 <th class="py-2">Keterangan</th>
                                 <th class="py-2">Methode</th>
                                 <th class="py-2">State</th>
+                                <th class="py-2">in PO</th>
                                 <th class="py-2">Actions</th>
                             </tr>
                         </thead>
@@ -67,6 +68,7 @@
                                                 Internal</option>
                                         </select>
                                     </td>
+                                    <td class="border px-4 py-2">{{ $item->inPO }}</td>
                                     <td class="border px-4 py-2">
                                         <button type="submit"
                                             class="bg-blue-500 text-white px-4 py-2 rounded-md">Update</button>
@@ -92,6 +94,7 @@
                                 <th class="py-2">Keterangan</th>
                                 <th class="py-2">Methode</th>
                                 <th class="py-2">State</th>
+                                <th class="py-2">in PO</th>
                                 <th class="py-2">Actions</th>
                             </tr>
                         </thead>
@@ -136,6 +139,7 @@
                                                 Internal</option>
                                         </select>
                                     </td>
+                                    <td class="border px-4 py-2">{{ $item->inPO }}</td>
                                     <td class="border px-4 py-2">
                                         <button type="submit"
                                             class="bg-blue-500 text-white px-4 py-2 rounded-md">Update</button>
