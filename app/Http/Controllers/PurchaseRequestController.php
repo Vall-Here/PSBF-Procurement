@@ -24,7 +24,7 @@ class PurchaseRequestController extends Controller
         
         $totalPPs = PurchaseRequest::count();
 
-        return view('Requisitions.PPembelian', [
+        return view('Requisitions.PP.PPembelian', [
             'PPs' => $PPs,
             'totalPPs' => $totalPPs,
         ]);
@@ -34,7 +34,7 @@ class PurchaseRequestController extends Controller
     public function edit($id)
     {
         $PP = PurchaseRequest::with('items')->findOrFail($id);
-        return view('Requisitions.editPP', compact('PP'));
+        return view('Requisitions.PP.editPP', compact('PP'));
     }
   
 
@@ -135,7 +135,7 @@ class PurchaseRequestController extends Controller
     public function editItem($id)
     {
         $item = PurchaseRequestItem::findOrFail($id);
-        return view('Requisitions.editItemPP', compact('item'));
+        return view('Requisitions.PP.editItemPP', compact('item'));
     }
 
     public function submitForReview($id)

@@ -1,12 +1,12 @@
 @extends('Layouts.Master')
-@section('title', 'Daftar RKB')
+@section('title', 'Daftar ro')
 
 @section('content')
     <div class="min-h-screen p-4 sm:ml-64">
         <div class="mt-14 rounded-lg p-4">
             <div class="container mx-auto px-4">
-                <h1 class="text-2xl font-bold mb-4">Buat RKB Baru</h1>
-                <form id="rkb-form" action="{{ route('rkbs.store') }}" method="POST">
+                <h1 class="text-2xl font-bold mb-4">Buat RO Baru</h1>
+                <form id="ro-form" action="{{ route('rush_orders.store') }}" method="POST">
                     @csrf
                     <div class="mb-4">
                         <label for="tahun_anggaran" class="block text-sm font-medium text-gray-700">Tahun Anggaran</label>

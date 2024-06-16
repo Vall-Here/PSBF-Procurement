@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RKB;
-use App\Models\Item;
+
 use App\Models\RKBItem;
 use Illuminate\Http\Request;
 use App\Models\PurchaseRequest;
@@ -24,7 +24,7 @@ class RKBController extends Controller
         
         $totalrkbs = RKB::count();
 
-        return view('Requisitions.rkb', [
+        return view('Requisitions.RKB.rkb', [
             'rkbs' => $rkbs,
             'totalrkbs' => $totalrkbs,
         ]);
@@ -32,8 +32,12 @@ class RKBController extends Controller
 
     public function create()
     {
-        return view('Requisitions.addRkb');
+        return view('Requisitions.RKB.addRkb');
     }
+
+    // RKBController.php
+    
+
 
     public function store(Request $request)
     {
@@ -51,9 +55,10 @@ class RKBController extends Controller
         $rkb = RKB::create([
             'tahun_anggaran' => $request->tahun_anggaran,
             'jumlah_anggaran' => $request->jumlah_anggaran,
-            'user_id' => auth()->id(),
+            // 'user_id' => auth()->id(),
+            'user_id' => 1,
         ]);
-
+        if (isset($request->items) && is_array($request->items) && isset($request->items['nama_barang'])) {
         foreach ($request->items['nama_barang'] as $index => $nama_barang) {
             $rkb->items()->create([
                 'nama_barang' => $nama_barang,
@@ -65,6 +70,10 @@ class RKBController extends Controller
                 'keterangan' => $request->items['keterangan'][$index] ?? null,
             ]);
         }
+        }else {
+            Alert::error('Error', 'No items provided.');
+            return redirect()->route('rkbs.index')->with('error', 'No items provided.');
+        }
 
         return redirect()->route('rkbs.index')->with('success', 'RKB created successfully.');
     }
@@ -72,7 +81,7 @@ class RKBController extends Controller
     public function edit($id)
     {
         $rkb = RKB::with('items')->findOrFail($id);
-        return view('Requisitions.editRkb', compact('rkb'));
+        return view('Requisitions.RKB.editRkb', compact('rkb'));
     }
 
     public function update(Request $request, $id)
@@ -166,7 +175,7 @@ class RKBController extends Controller
     public function editItem($id)
     {
         $item = RKBItem::findOrFail($id);
-        return view('Requisitions.editItem', compact('item'));
+        return view('Requisitions.RKB.editItem', compact('item'));
     }
 
     public function createPurchaseRequest($id)
@@ -205,4 +214,30 @@ class RKBController extends Controller
         return redirect()->route('rkbs.index')->with('success', 'RKB has been forwarded to Purchase Request successfully.');
     }
 
+   
+    public function addItem()
+    {
+        return view('Requisitions.RKB.addItemRkb');
+    }
+
+    public function storeItem(Request $request)
+    {
+        // Validasi input item
+        $validated = $request->validate([
+            'nama_barang' => 'required|string',
+            'satuan' => 'required|string',
+            'rencana_pakai' => 'required|integer',
+            'rencana_beli' => 'required|integer',
+            'mata_uang' => 'required|string',
+            'harga_satuan' => 'required|numeric',
+            'keterangan' => 'nullable|string',
+        ]);
+
+        // Simpan item ke session
+        $items = session()->get('rkb_items', []);
+        $items[] = $validated;
+        session()->put('rkb_items', $items);
+
+        return redirect()->route('rkbs.create');
+    }
 }
