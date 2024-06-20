@@ -148,13 +148,13 @@ class PurchaseRequestController extends Controller
         return redirect()->route('PP.index');
     }
 
-    public function review(Request $request, $id)
+    public function review(Request $request, $id, $role)
     {
         $pp = PurchaseRequest::findOrFail($id);
-        $userRole = auth()->user()->role; // Assuming you have roles for users
+        $roles = $role;
 
         $reviewStatus = $pp->review_status;
-        $reviewStatus[$userRole] = $request->input('status');
+        $reviewStatus[$roles] = $request->input('status');
         $pp->review_status = $reviewStatus;
         
         if ($pp->isApprovedByAll()) {
@@ -163,6 +163,7 @@ class PurchaseRequestController extends Controller
 
         $pp->save();
 
+        Alert::success('Success', 'PP review status updated.');
         return redirect()->route('PP.index')->with('success', 'PP review status updated.');
     }
 

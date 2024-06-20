@@ -62,13 +62,17 @@
 
             <h2 class="text-xl font-bold mt-6">Review Status</h2>
             <ul>
-                <li>Gudang: {{ $PP->review_status['gudang'] }}</li>
-                <li>Financial: {{ $PP->review_status['financial'] }}</li>
-                <li>Procurement: {{ $PP->review_status['procurement'] }}</li>
+                <li>Gudang: {{ $PP->review_status['pengendali_gudang'] }}</li>
+                <li>Financial: {{ $PP->review_status['pengendali_finansial'] }}</li>
+                <li>Procurement: {{ $PP->review_status['pengendali_proc'] }}</li>
             </ul>
 
-            {{-- @if (auth()->user()->role === 'gudang' || auth()->user()->role === 'financial' || auth()->user()->role === 'procurement') --}}
-            <form action="{{ route('PP.review', $PP->id) }}" method="POST" class="mt-4">
+            @php
+                $rolesnow = Auth::user()->getRoleNames()->first();
+            @endphp
+
+            @if ($rolesnow == 'pengendali_gudang' || $rolesnow == 'pengendali_finansial' || $rolesnow == 'pengendali_proc')
+            <form action="{{ route('PP.review', ['id' => $PP->id, 'role' => $rolesnow]) }}" method="POST" class="mt-4">
                 @csrf
                 <div class="mb-4">
                     <label for="status" class="block text-sm font-medium text-gray-700">Review Status</label>
@@ -79,7 +83,7 @@
                 </div>
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Submit Review</button>
             </form>
-            {{-- @endif --}}
+            @endif
 
         </div>
     </div>

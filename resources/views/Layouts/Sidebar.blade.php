@@ -41,19 +41,19 @@
                             class="flex rounded-sm  text-sm focus:ring-4 focus:bg-gray-200 p-2 font-bold ms-4 dark:focus:bg-gray-600"
                             aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
-                            username
+                            {{ Auth::user()->name }}
                         </button>
                     </div>
                     <div class="z-50 my-4 hidden list-none divide-y divide-gray-100 rounded bg-white text-base shadow dark:divide-gray-600 dark:bg-gray-700"
                         id="dropdown-user">
                         <div class="px-4 py-3" role="none">
                             <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                ROLES
+                                {{ Auth::user()->getRoleNames()->first()}}
                             </p>
 
                         </div>
                         <ul class="py-1" role="none">
-                            <li>
+                            {{-- <li>
                                 <a href="#"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Dashboard</a>
@@ -62,12 +62,27 @@
                                 <a href="#"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Profile</a>
-                            </li>
+                            </li> --}}
                             <li>
-                                <a href=""
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="block px-6  py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem"  type="submit">Logout</button>
+                                </form>
+                                {{-- <a href="{{ route('logout') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Sign out</a>
+                                    >Sign out</a> --}}
                             </li>
+
+                            {{-- @auth
+                            <p>Welcome, {{ Auth::user()->name }}!</p>
+                            <p>Your role: {{ Auth::user()->getRoleNames()->first() }}</p>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit">Logout</button>
+                            </form>
+                            @else
+                                <a href="{{ route('login') }}">Login</a>
+                            @endauth --}}
                         </ul>
                     </div>
                 </div>
