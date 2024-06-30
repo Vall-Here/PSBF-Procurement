@@ -12,7 +12,7 @@ use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\PurchaseRequestController;
 
 
-Route::get('alert', function () {
+Route::get('/alert', function () {
     return view('text');
 })->name('alert');
 
@@ -127,12 +127,6 @@ Route::middleware(['auth:web', 'role:asset_staff|kabag_proc|kasi_impor|kasi_loka
 // purchase order
 Route::resource('purchase_orders', PurchaseOrderController::class);
 Route::get('purchase-orders/items', [PurchaseOrderController::class, 'filterItems'])->name('purchase_orders.filter_items');
-
-
-
-
-
-
 
 
 //auth
