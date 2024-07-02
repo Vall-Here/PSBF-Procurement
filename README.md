@@ -23,13 +23,25 @@ this is starter branch dont commit anything in this branch
 - copy env.example rename to .env
 - buat tabel di mysql named 'psbf'
 - di env pastikan nama database psbf
+    [
+        DB_CONNECTION=mysql
+        DB_HOST=127.0.0.1
+        DB_PORT=3306
+        DB_DATABASE=psbf
+        DB_USERNAME=root
+        DB_PASSWORD=
+    ]
 - Run php artisan key:generate
 - Run php artisan migrate
+- Run php artisan db:seed
 - npm install
 - run npm run dev
 - buka terminal baru
 - run php artisan storage:link
 - run php artisan serve
+
+Login : admin@example.com
+Pw : 123
 
 
 ===========================================================================
