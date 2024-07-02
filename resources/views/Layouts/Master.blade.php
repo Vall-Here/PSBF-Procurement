@@ -20,9 +20,7 @@
         
         @include('sweetalert::alert')
         @include('Layouts.Sidebar')
-        <button x-data="{}" @click="window.scrollTo({ top: 0, behavior: 'smooth' })" id="scroll-to-top" class="fixed bottom-10 right-10 z-50 rounded-full dark:bg-gray-100 w-12 h-12 hidden justify-center items-center shadow-md">
-            <i class="fas fa-arrow-up text-3xl"></i>
-        </button>
+   
         @yield('content')
 
         

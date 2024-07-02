@@ -44,8 +44,8 @@ class RushOrderController extends Controller
         $ro = RushOrder::create([
             'tahun_anggaran' => $validated['tahun_anggaran'],
             'jumlah_anggaran' => $validated['jumlah_anggaran'],
-             // 'user_id' => auth()->id(),
-            'user_id' =>1,
+             'user_id' => auth()->id(),
+            // 'user_id' =>1,
         ]);
 
         // Simpan item ke database

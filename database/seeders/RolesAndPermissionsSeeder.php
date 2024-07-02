@@ -49,9 +49,9 @@ class RolesAndPermissionsSeeder extends Seeder
         Role::findByName('pel_intern')->givePermissionTo(['buat_rkb', 'edit_rkb','hapus_rkb','buat_rencana_pembelian','edit_rencana_pembelian','buat_rush_order','edit_rush_order','manage_purchase_orders']);
         Role::findByName('pel_impor')->givePermissionTo(['buat_rkb', 'edit_rkb','hapus_rkb','buat_rencana_pembelian','edit_rencana_pembelian','buat_rush_order','edit_rush_order','manage_purchase_orders']);
         Role::findByName('asset_staff')->givePermissionTo(['buat_rush_order','edit_rush_order']);
-        // Tambahkan assign role dan permission lainnya sesuai dokumen
-        // Misalnya:
-        // Role::findByName('pengendali_gudang')->givePermissionTo(['manage_products']);
+  
+
+        
 
         // Create an admin user and assign role
         $admin = User::firstOrCreate([
