@@ -117,6 +117,13 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('vendors.index') }}"
+                    class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                    <ion-icon class="dark:text-gray-400 text-gray-500 text-2xl" name="people"></ion-icon>
+                    <span class="ms-3">Daftar Vendors</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('roles.index') }}"
                     class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                     <svg class="w-6 fill-gray-500"  viewBox="0 0 52 52" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg">

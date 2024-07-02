@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RKBController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VendorController;
 use App\Http\Controllers\RushOrderController;
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\KlasifikasiController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\PurchaseRequestController;
@@ -47,6 +48,8 @@ Route::middleware(['auth:web', 'role:kabag_proc'])->group(function () {
     Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
+
+Route::resource('vendors', VendorController::class);
 
 
 // rkb

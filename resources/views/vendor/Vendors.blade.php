@@ -29,7 +29,7 @@
                             <div class="flex items-center flex-1 space-x-4">
                                 <h5>
                                     <span class="text-gray-500">All vendors:</span>
-                                    <span class="dark:text-white">{{ $totalvendors }}</span>
+                                    <span class="dark:text-white">{{ $totalVendors }}</span>
                                 </h5>
                                 <form action="" method="GET" class="w-full mx-auto">
                                     <label for="default-search"
@@ -60,7 +60,7 @@
                                                 <label for="checkbox-all" class="sr-only">checkbox</label>
                                             </div>
                                         </th> --}}
-                                        <th scope="col" class="px-4 py-3">vendorname</th>
+                                        <th scope="col" class="px-4 py-3">vendor name</th>
                                         <th scope="col" class="px-4 py-3">Email</th>
                                         <th scope="col" class="px-4 py-3">Role</th>
                                         
@@ -68,7 +68,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($vendors as $vendor)
+                                    @foreach ($Vendors as $vendor)
                                         <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                                             {{-- <td class="w-4 px-4 py-3">
                                                 <div class="flex items-center">
@@ -101,12 +101,12 @@
                                             </td>
                                             
                                         </tr>
-                                 @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <div class="w-full p-8">
-                            {{ $vendors->links('Layouts.Pagination') }}
+                            {{ $Vendors->links('Layouts.Pagination') }}
                         </div>
                     </div>
                 </div>
